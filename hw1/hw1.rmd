@@ -1,0 +1,50 @@
+---
+title: "Regression III - Homework 1"
+author: "Dave Armstrong"
+# date: "5/25/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+This homework is meant to get you working with linear models and to have you evaluate and present multiplicative models .  To that end, I have asked you to run a number of models and evaluate various hypotheses.  As the assignments are mainly meant as a tool to allow you to better assimilate the information presented in the class, you may present them in whatever method is most useful to you.  I would ask, however if you're writing math to please use math characters (preferably in an equation environment).  From my point of view, it is always easier to read proper tables than statistical output, so that is certainly appreciated, but not an absolute requirement.
+
+The data you will use are an excerpt of data from measurement models that have been run to produce continuous measures of violent internal dissent, democracy and state repression for 1984 (these are TSCS data, but I don't want to clutter things up with TSCS problems).  These data can be downloaded and saved to your computer from my website as follows: 
+
+```{r}
+f <- file("https://quantoid.net/files/reg3/hw1.rda")
+load(f)
+```
+
+or you can load the R dataframe that is included with the homework.  This will put an object called `hw1` in your workspace, which has the following variables: 
+
+- `country` Country Name
+
+- `ccode` Numeric COW country code
+
+- `abb` Three-letter country abbreviation
+
+- `pop` Population in thousands
+
+- `rgdpch` Real GDP/capita
+
+- `democracy` Behavioral measure of democracy including legislative competition/participation, competitiveness of executive recruitment and participation and others.  This is a continuous measure.  Higher numbers here mean greater levels of democracy.
+
+- `vdiss` Violent dissent based on terrorist events and fatalities, as well as guerrilla wars and riots.  This is a continuous measure bounded between 0 and 1 and gives the probability that the country is in a state of violent conflict (as violent conflict is a latent variable).
+
+- `vdissdum` Binary violent dissent variable based on the same data as `vdiss`.
+
+- `repression` Violations of physical integrity rights.  This is the result of a measurement model run on the CIRI data on torture, forced disappearances, extrajudicial killings and political imprisonment.  This is also a continuous measure. Higher numbers here mean higher levels of repression.
+
+Some scholars suggest that the pacifying effect of democracy is conditional and works much better in peaceful countries than in countries in a state of violent conflict.  You job is to evaluate this hypothesis in a couple of different ways.
+
+1. Run a linear model with `repression` as the dependent variable and `vdiss`, `democracy`, `rgdpch` and the log of `pop` as the independent variables all additively related to `repression`.  How well does the model fit?
+
+2. Run a model similar to the one above, but add a multiplicative term between `democracy` and `vdiss`.  Compare this to the previous model and discuss whether the multiplicative model is "better" than the additive model and how you know.
+
+3. Given that both `vdiss` and `democracy` are continuous measures, present the results of the second model graphically.  You can do this using any of the tools we spoke about in class. Interpret the findings in terms of the hypothesis forwarded above - that the effect of democracy is greater in countries that are not experiencing violent conflict.
+
+4. Now, repeat the process above, but using the `vdissdum` variable in place of `vdiss`.  Does this change the inferences you would make and if so, how?  If this were your research, which of these two variables would you use and why?  Note, that to get the tools we talked about in class to work, you'll need to make sure that `vdissdum` is a factor before you run the model. 
+
+
